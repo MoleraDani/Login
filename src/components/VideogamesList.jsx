@@ -1,32 +1,19 @@
 import { useState } from 'react'
 import { FavIcon } from './FavIcon'
 import { useAuth } from '../hooks/useAuth'
-import { db } from '../firebase'
+import { db } from '../firebase.js'
 
 function VideogamesCard({ videogames }) {
   const [selectedVideogameId, setSelectedVideogameId] = useState(null)
   const { user } = useAuth()
 
-  const handleFavIconClick = async () => {
+  const handleFavIconClick = () => {
     if (user) {
-      const uid = user.uid
-      const favoritesRef = db
-        .collection('users')
-        .doc(uid)
-        .collection('favorites')
-        .doc(selectedVideogameId)
-
-      const doc = await favoritesRef.get()
-
-      if (doc.exists) {
-        await favoritesRef.update({
-          timestamp: new Date().toISOString()
-        })
-      } else {
-        await favoritesRef.set({
-          timestamp: new Date().toISOString()
-        })
-      }
+      const userRef = db.collection('users').doc(user.uid)
+      userRef.update({
+        videogameIds:
+          firebase.firestore.FieldValue.arrayUnion(selectedVideogameId)
+      })
     }
   }
 
