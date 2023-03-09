@@ -29,6 +29,7 @@ function VideogamesCard({ videogames }) {
           // Actualizamos el documento del usuario con la nueva lista de favoritos
           await setDoc(userRef, { videogameIds }, { merge: true })
         }
+        console.log(favoritesId)
       } catch (error) {
         throw new Error(
           'Ha ocurrido un error al añadir el videojuego a tus favoritos. Inténtalo de nuevo más tarde.'
@@ -45,10 +46,11 @@ function VideogamesCard({ videogames }) {
           const userData = doc.data()
           const videogameIds = userData.videogameIds || []
           setFavoritesIds(videogameIds)
+          console.log(favoritesId)
         }
       })
     }
-  }, [user])
+  }, [user, selectedVideogameId])
 
   return videogames.map((videogame) => (
     <li key={videogame.id} className='videogames-element'>
