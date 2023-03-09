@@ -4,9 +4,36 @@ import { useAuth } from '../hooks/useAuth'
 import { db } from '../firebase'
 import { setDoc, doc, getDoc } from 'firebase/firestore'
 
+export function useVideogamesCard() {
+  const [favoritesId, setFavoritesIds] = useState([])
+
+  const { user } = useAuth()
+
+  const getFavoritesFromDDBB = async () => {
+    if (user) {
+      const userRef = doc(db, 'users', user.uid)
+      getDoc(userRef).then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data()
+          const videogameIds = userData.videogameIds || []
+          setFavoritesIds(videogameIds)
+        }
+      })
+    }
+  }
+
+  return {
+    favoritesId,
+    setFavoritesIds,
+    getFavoritesFromDDBB
+  }
+}
+
 function VideogamesCard({ videogames }) {
   const [selectedVideogameId, setSelectedVideogameId] = useState(null)
-  const [favoritesId, setFavoritesIds] = useState([])
+  const { favoritesId, getFavoritesFromDDBB, setFavoritesIds } =
+    useVideogamesCard()
+  console.log({ favoritesId })
 
   const { user } = useAuth()
 
@@ -21,15 +48,20 @@ function VideogamesCard({ videogames }) {
 
         // Comprobamos si el videojuego ya está en la lista de favoritos
         const videogameIds = userData?.videogameIds || []
+        const videogameIndex = videogameIds.indexOf(selectedVideogame)
+
         if (!videogameIds.includes(selectedVideogame)) {
           videogameIds.push(selectedVideogame)
 
           setFavoritesIds([...favoritesId, selectedVideogame])
 
           // Actualizamos el documento del usuario con la nueva lista de favoritos
-          await setDoc(userRef, { videogameIds }, { merge: true })
+        } else {
+          // El videojuego ya está en la lista, lo eliminamos
+          videogameIds.splice(videogameIndex, 1)
+          setFavoritesIds(videogameIds)
         }
-        console.log(favoritesId)
+        await setDoc(userRef, { videogameIds }, { merge: true })
       } catch (error) {
         throw new Error(
           'Ha ocurrido un error al añadir el videojuego a tus favoritos. Inténtalo de nuevo más tarde.'
@@ -39,17 +71,7 @@ function VideogamesCard({ videogames }) {
   }
 
   useEffect(() => {
-    if (user) {
-      const userRef = doc(db, 'users', user.uid)
-      getDoc(userRef).then((doc) => {
-        if (doc.exists()) {
-          const userData = doc.data()
-          const videogameIds = userData.videogameIds || []
-          setFavoritesIds(videogameIds)
-          console.log(favoritesId)
-        }
-      })
-    }
+    getFavoritesFromDDBB()
   }, [user, selectedVideogameId])
 
   return videogames.map((videogame) => (

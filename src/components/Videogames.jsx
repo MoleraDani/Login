@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useVideogames } from '../hooks/useVideogames'
 import './Videogames.css'
 import { useAuth } from '../hooks/useAuth'
+import { Link } from 'react-router-dom'
 
 export function useSearch({ search }) {
   const isFirstInput = useRef(true)
@@ -42,6 +43,10 @@ export function Videogames() {
     <div className='page'>
       <header className='header'>
         <button onClick={handleLogout}>Log out</button>
+        <span className='line'>
+          {/*router link*/}
+          <Link to='/favoritos'>Favoritos</Link>
+        </span>
         <h3>Busqueda de videojuegos</h3>
         <form action='' onSubmit={handleSubmit}>
           <input type='text' name='query' id='' />
