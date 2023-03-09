@@ -47,7 +47,6 @@ export function Login() {
           <h1>Has iniciado sesion</h1>
           <br />
           <p>Bienvenido {user.email.split('@')[0]}</p>
-          {console.log(user.email)}
         </section>
       ) : (
         <section>

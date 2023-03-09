@@ -24,7 +24,6 @@ export function Videogames() {
     const field = new FormData(event.target)
     const query = field.get('query')
     setSearch(query)
-    console.log(search)
   }
 
   useEffect(() => {

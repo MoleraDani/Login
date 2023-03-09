@@ -1,21 +1,54 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FavIcon } from './FavIcon'
 import { useAuth } from '../hooks/useAuth'
-import { db } from '../firebase.js'
+import { db } from '../firebase'
+import { setDoc, doc, getDoc } from 'firebase/firestore'
 
 function VideogamesCard({ videogames }) {
   const [selectedVideogameId, setSelectedVideogameId] = useState(null)
+  const [favoritesId, setFavoritesIds] = useState([])
+
   const { user } = useAuth()
 
-  const handleFavIconClick = () => {
+  const handleFavIconClick = async (selectedVideogame) => {
     if (user) {
-      const userRef = db.collection('users').doc(user.uid)
-      userRef.update({
-        videogameIds:
-          firebase.firestore.FieldValue.arrayUnion(selectedVideogameId)
-      })
+      try {
+        const userRef = doc(db, 'users', user.uid)
+
+        // Obtenemos los datos actuales del documento del usuario
+        const userSnapshot = await getDoc(userRef)
+        const userData = userSnapshot.exists() ? userSnapshot.data() : {}
+
+        // Comprobamos si el videojuego ya está en la lista de favoritos
+        const videogameIds = userData?.videogameIds || []
+        if (!videogameIds.includes(selectedVideogame)) {
+          videogameIds.push(selectedVideogame)
+
+          setFavoritesIds([...favoritesId, selectedVideogame])
+
+          // Actualizamos el documento del usuario con la nueva lista de favoritos
+          await setDoc(userRef, { videogameIds }, { merge: true })
+        }
+      } catch (error) {
+        throw new Error(
+          'Ha ocurrido un error al añadir el videojuego a tus favoritos. Inténtalo de nuevo más tarde.'
+        )
+      }
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      const userRef = doc(db, 'users', user.uid)
+      getDoc(userRef).then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data()
+          const videogameIds = userData.videogameIds || []
+          setFavoritesIds(videogameIds)
+        }
+      })
+    }
+  }, [user])
 
   return videogames.map((videogame) => (
     <li key={videogame.id} className='videogames-element'>
@@ -28,9 +61,12 @@ function VideogamesCard({ videogames }) {
         <FavIcon
           onClick={() => {
             setSelectedVideogameId(videogame.id)
-            handleFavIconClick()
+            handleFavIconClick(videogame.id)
           }}
-          isActive={selectedVideogameId === videogame.id}
+          isActive={
+            selectedVideogameId === videogame.id ||
+            favoritesId.includes(videogame.id)
+          }
         />
       </figure>
     </li>
