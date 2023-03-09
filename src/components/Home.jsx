@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 export function Home() {
   const { logout, user } = useAuth()
 
-  console.log(user)
+  // console.log(user)
   const handleLogout = async () => {
     try {
       await logout()
