@@ -6,8 +6,7 @@ export function useFavorites({ favoriteIds }) {
 
   const getFavorites = async () => {
     const newFavorites = await searchFavorites({ favoriteIds })
-    setFavorites((prevState) => [...prevState, newFavorites])
-    console.log(favorites)
+    setFavorites(newFavorites)
   }
 
   return { favorites, getFavorites }

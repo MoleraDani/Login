@@ -19,7 +19,6 @@ export function useSearch({ search }) {
 
 function App() {
   const { favoritesId } = useVideogamesCard()
-  console.log(favoritesId)
 
   return (
     <main className='App'>
@@ -41,14 +40,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path='/favoritos'
-          element={
-            <ProtectedRoute>
-              <Favorites favoriteIds={favoritesId} />
-            </ProtectedRoute>
-          }
-        />
+
         <Route path='/register' element={<Register />} />
       </Routes>
     </main>

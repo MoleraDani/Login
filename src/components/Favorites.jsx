@@ -9,30 +9,17 @@ export function Favorites({ favoriteIds }) {
     getFavorites()
   }, [favoriteIds])
 
-  return (
-    <div className='page'>
-      <header className='header'>
-        {/* <button onClick={handleLogout}>Log out</button> */}
-        <span className='line'>
-          {/*router link*/}
-          <Link to='/'>Home</Link>
-        </span>
-      </header>
-      <main>
-        <ul className='videogames-list'>
-          {favorites.map((favorite) => (
-            <li key={favorite.id} className='videogames-element'>
-              <h3>
-                {favorite.title} <br />
-                <small>{favorite.year}</small>
-              </h3>
-              <figure className='image-container'>
-                <img src={favorite.poster} alt={`${favorite.Title} poster`} />
-              </figure>
-            </li>
-          ))}
-        </ul>
-      </main>
-    </div>
-  )
+  console.log(favoriteIds)
+
+  return favorites.map((favorite) => (
+    <li key={favorite.id} className='videogames-element'>
+      <h3>
+        {favorite.title} <br />
+        <small>{favorite.year}</small>
+      </h3>
+      <figure className='image-container'>
+        <img src={favorite.poster} alt={`${favorite.Title} poster`} />
+      </figure>
+    </li>
+  ))
 }
