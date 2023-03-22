@@ -5,15 +5,15 @@ import './Videogames.css'
 import { useAuth } from '../hooks/useAuth'
 import { Link } from 'react-router-dom'
 
-export function useSearch({ search }) {
-  const isFirstInput = useRef(true)
+// export function useSearch({ search }) {
+//   const isFirstInput = useRef(true)
 
-  useEffect(() => {
-    if (isFirstInput) {
-      isFirstInput.current = search === ''
-    }
-  }, [])
-}
+//   useEffect(() => {
+//     if (isFirstInput) {
+//       isFirstInput.current = search === ''
+//     }
+//   }, [])
+// }
 
 export function Videogames() {
   const { logout, user } = useAuth()

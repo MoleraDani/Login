@@ -1,18 +1,22 @@
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { useFavorites } from '../hooks/useFavorites'
-import { Link } from 'react-router-dom'
 
-export function Favorites({ favoriteIds }) {
-  const { favorites, getFavorites } = useFavorites({ favoriteIds })
+export function VideogameDetails() {
+  const { videogameId } = useParams()
+  const { favorites, getFavorites } = useFavorites({
+    favoriteIds: [videogameId]
+  })
 
   useEffect(() => {
     getFavorites()
-  }, [favoriteIds])
+  }, [videogameId])
 
-  // console.log(favoriteIds)
+  // const videogameDetail = favorites[0]
+  // console.log(videogameDetail)
 
   return favorites.map((favorite) => (
-    <li key={favorite.id} className='videogames-element'>
+    <section key={favorite.id}>
       <h3>
         {favorite.title} <br />
         <small>{favorite.year}</small>
@@ -20,6 +24,8 @@ export function Favorites({ favoriteIds }) {
       <figure className='image-container'>
         <img src={favorite.poster} alt={`${favorite.Title} poster`} />
       </figure>
-    </li>
+    </section>
   ))
+
+  // return <p>{videogameDetail.title}</p>
 }

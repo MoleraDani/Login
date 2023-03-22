@@ -8,7 +8,8 @@ export function useVideogames({ search }) {
     const newVideogames = await searchVideogames({ search })
     setVideogames(newVideogames)
 
-    // searchFavorites({
+
+       // searchFavorites({
     //   favoriteIds: [
     //     'tt0499549',
     //     'tt1630029',

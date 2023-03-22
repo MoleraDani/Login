@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 import { db } from '../firebase'
 import { setDoc, doc, getDoc } from 'firebase/firestore'
 import { Favorites } from './Favorites'
+import { Link } from 'react-router-dom'
 
 export function useVideogamesCard() {
   const favoritesIdsRef = useRef([])
@@ -56,19 +57,18 @@ export function VideogamesList({ videogames }) {
 
         if (!videogameIds.includes(selectedVideogame)) {
           videogameIds.push(selectedVideogame)
-
+          // Actualizamos el documento del usuario con la nueva lista de favoritos
           favoritesIdsRef.current = [
             ...favoritesIdsRef.current,
             selectedVideogame
           ]
-
-          // Actualizamos el documento del usuario con la nueva lista de favoritos
         } else {
           // El videojuego ya está en la lista, lo eliminamos
           videogameIds.splice(videogameIndex, 1)
           favoritesIdsRef.current = videogameIds
         }
         await setDoc(userRef, { videogameIds }, { merge: true })
+        setSelectedVideogameId(null) // Deselecciona el videojuego
       } catch (error) {
         throw new Error(
           'Ha ocurrido un error al añadir el videojuego a tus favoritos. Inténtalo de nuevo más tarde.'
@@ -101,22 +101,25 @@ export function VideogamesList({ videogames }) {
                   {videogame.title} <br />
                   <small>{videogame.year}</small>
                 </h3>
-                <figure className='image-container'>
-                  <img
-                    src={videogame.poster}
-                    alt={`${videogame.Title} poster`}
-                  />
-                  <FavIcon
-                    onClick={() => {
-                      setSelectedVideogameId(videogame.id)
-                      handleFavIconClick(videogame.id)
-                    }}
-                    isActive={
-                      selectedVideogameId === videogame.id ||
-                      favoritesIdsRef.current.includes(videogame.id)
-                    }
-                  />
-                </figure>
+                <Link to={'videogames/' + videogame.id}>
+                  <figure className='image-container'>
+                    <img
+                      src={videogame.poster}
+                      alt={`${videogame.Title} poster`}
+                    />
+                    <FavIcon
+                      onClick={(event) => {
+                        event.preventDefault()
+                        setSelectedVideogameId(videogame.id)
+                        handleFavIconClick(videogame.id)
+                      }}
+                      isActive={
+                        selectedVideogameId === videogame.id ||
+                        favoritesIdsRef.current.includes(videogame.id)
+                      }
+                    />
+                  </figure>
+                </Link>
               </li>
             ))
           ) : (

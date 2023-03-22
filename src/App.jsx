@@ -5,6 +5,7 @@ import { Videogames } from './components/Videogames'
 import { Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { Favorites } from './components/Favorites'
+import { VideogameDetails } from './components/VideogameDetails'
 import { useVideogamesCard } from './components/VideogamesList'
 
 export function useSearch({ search }) {
@@ -40,6 +41,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path='/videogames/:videogameId' element={<VideogameDetails />} />
 
         <Route path='/register' element={<Register />} />
       </Routes>
