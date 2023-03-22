@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useFavorites } from '../hooks/useFavorites'
-import { Link } from 'react-router-dom'
 
 export function Favorites({ favoriteIds }) {
   const { favorites, getFavorites } = useFavorites({ favoriteIds })
