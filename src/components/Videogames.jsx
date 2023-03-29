@@ -1,9 +1,8 @@
 import { VideogamesList } from './VideogamesList'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useVideogames } from '../hooks/useVideogames'
 import './Videogames.css'
 import { useAuth } from '../hooks/useAuth'
-import { Link } from 'react-router-dom'
 
 // export function useSearch({ search }) {
 //   const isFirstInput = useRef(true)
@@ -19,6 +18,7 @@ export function Videogames() {
   const { logout, user } = useAuth()
   const [search, setSearch] = useState('')
   const { videogames, getVideogames } = useVideogames({ search })
+  const [showSearch, setShowSearch] = useState(true)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -39,18 +39,27 @@ export function Videogames() {
     }
   }
 
+  const handleToggleSearchVisibility = (showFavorites) => {
+    setShowSearch(!showFavorites)
+  }
+
   return (
     <div className='page'>
       <header className='header'>
         <button onClick={handleLogout}>Log out</button>
         <h3>Busqueda de videojuegos</h3>
-        <form action='' onSubmit={handleSubmit}>
-          <input type='text' name='query' id='' />
-          <button>Buscar</button>
-        </form>
+        {showSearch && (
+          <form action='' onSubmit={handleSubmit}>
+            <input type='text' name='query' id='' />
+            <button>Buscar</button>
+          </form>
+        )}
       </header>
       <main>
-        <VideogamesList videogames={videogames} />
+        <VideogamesList
+          videogames={videogames}
+          onToggleShowFavorites={handleToggleSearchVisibility}
+        />
       </main>
     </div>
   )

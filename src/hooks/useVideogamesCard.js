@@ -1,48 +1,42 @@
-// import { useState, useEffect } from 'react'
-// import { useAuth } from '../hooks/useAuth'
-// import { doc, getDoc } from 'firebase/firestore'
-// import { db } from '../firebase'
+import { useState, useEffect } from 'react'
+import { useAuth } from '../hooks/useAuth'
+import { doc, onSnapshot } from 'firebase/firestore'
+import { db } from '../firebase'
 
-// export function useVideogamesCard() {
-//   // const favoritesIdsRef = useRef([])
+export function useVideogamesCard() {
+  const [favoritesIds, setFavoritesIds] = useState([])
+  const { user } = useAuth()
 
-//   // const { user } = useAuth()
+  //Listener en tiempo real de cambios del usuario actual
+  const getFavoritesFromDDBB = () => {
+    if (user) {
+      const userRef = doc(db, 'users', user.uid)
+      const unsubscribe = onSnapshot(userRef, (docSnapshot) => {
+        if (docSnapshot.exists()) {
+          const userData = docSnapshot.data()
+          const videogameIds = userData.videogameIds || []
+          setFavoritesIds(videogameIds)
+        }
+      })
 
-//   // const getFavoritesFromDDBB = async () => {
-//   //   if (user) {
-//   //     const userRef = doc(db, 'users', user.uid)
-//   //     getDoc(userRef).then((doc) => {
-//   //       if (doc.exists()) {
-//   //         const userData = doc.data()
-//   //         const videogameIds = userData.videogameIds || []
-//   //         favoritesIdsRef.current = videogameIds
-//   //       }
-//   //     })
-//   //   }
-//   // }
+      // Limpiar el listener al desmontar el componente
+      return () => {
+        unsubscribe()
+      }
+    }
+  }
 
-//   const [favoritesIds, setFavoritesIds] = useState([])
+  useEffect(() => {
+    const unsubscribe = getFavoritesFromDDBB()
+    return () => {
+      if (unsubscribe) {
+        unsubscribe()
+      }
+    }
+  }, [user])
 
-//   const { user } = useAuth()
-
-//   const getFavoritesFromDDBB = async () => {
-//     if (user) {
-//       const userRef = doc(db, 'users', user.uid)
-//       const docSnapshot = await getDoc(userRef)
-//       if (docSnapshot.exists()) {
-//         const userData = docSnapshot.data()
-//         const videogameIds = userData.videogameIds || []
-//         setFavoritesIds(videogameIds)
-//       }
-//     }
-//   }
-
-//   useEffect(() => {
-//     getFavoritesFromDDBB()
-//   }, [user])
-
-//   return {
-//     favoritesIds,
-//     getFavoritesFromDDBB
-//   }
-// }
+  return {
+    favoritesIds,
+    getFavoritesFromDDBB
+  }
+}

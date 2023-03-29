@@ -1,12 +1,10 @@
-import { Register } from './components/Register'
-import { Login } from './components/Login'
-import { Home } from './components/Home'
-import { Videogames } from './components/Videogames'
+import { Register } from './Pages/Register'
+import { Login } from './Pages/Login'
+import { Home } from './Pages/Home'
 import { Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
-import { Favorites } from './components/Favorites'
-import { VideogameDetails } from './components/VideogameDetails'
-import { useVideogamesCard } from './components/VideogamesList'
+import { VideogameDetails } from './Pages/VideogameDetails'
+import { useVideogamesCard } from './hooks/useVideogamesCard'
 
 export function useSearch({ search }) {
   const isFirstInput = useRef(true)
@@ -25,19 +23,11 @@ function App() {
     <main className='App'>
       <Routes>
         <Route path='/login' element={<Login />} />
-        {/* <Route
-          path='/'
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        /> */}
         <Route
           path='/'
           element={
             <ProtectedRoute>
-              <Videogames />
+              <Home />
             </ProtectedRoute>
           }
         />

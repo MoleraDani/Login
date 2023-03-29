@@ -10,6 +10,16 @@ main {
 
 .image-container {
   position: relative;
+  max-width: 272px;
+  max-height: 152px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .image-container svg {
@@ -46,11 +56,6 @@ main {
 
 .videogames-element {
   text-align: center;
-}
-
-.videogames-element img {
-  max-width: 100%;
-  border-radius: 8px;
 }
 
 .videogames-element h3 {
