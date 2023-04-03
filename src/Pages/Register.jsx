@@ -274,7 +274,7 @@ export function Register() {
             <button
               disabled={!validEmail || !validPwd || !validMatch ? true : false}
             >
-              Resgistrarse
+              Registrarse
             </button>
           </form>
           <p>

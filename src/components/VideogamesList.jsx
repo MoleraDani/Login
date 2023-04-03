@@ -1,19 +1,20 @@
 import { useState } from 'react'
-import { useVideogamesCard } from '../hooks/useVideogamesCard'
+import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'
 import { VideogamesCard } from './VideogamesCard'
 import { Favorites } from './Favorites'
+import { useSearchResults } from '../context/SearchResults'
 
 function NoResults() {
   return <p>No se han obtenido resultados</p>
 }
 
-export function VideogamesList({ videogames, onToggleShowFavorites }) {
-  const [selectedVideogameId] = useState(null)
-  const { favoritesIds } = useVideogamesCard()
+export function VideogamesList({ onToggleShowFavorites }) {
+  const { favoritesIds } = useVideogamesFavorites()
   const [showFavorites, setShowFavorites] = useState(false)
+  const { searchResults } = useSearchResults()
 
   // const { user } = useAuth()
-  const hasVideogames = videogames?.length > 0
+  const hasVideogames = searchResults?.length > 0
 
   const handleToggleShowFavorites = () => {
     setShowFavorites(!showFavorites)
@@ -31,15 +32,7 @@ export function VideogamesList({ videogames, onToggleShowFavorites }) {
         <Favorites favoriteIds={favoritesIds} />
       ) : (
         <ul className='videogames-list'>
-          {hasVideogames ? (
-            <VideogamesCard
-              videogames={videogames}
-              // selectedVideogame={selectedVideogameId}
-              // selectedVideogameId={selectedVideogameId}
-            />
-          ) : (
-            <NoResults />
-          )}
+          {hasVideogames ? <VideogamesCard /> : <NoResults />}
         </ul>
       )}
     </>

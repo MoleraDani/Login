@@ -1,6 +1,7 @@
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 
+//Agrega o elimina videojuegos de la lista de favoritos en la base de datos cuando se hace clic en favicon
 export const handleFavIconClick = async ({
   selectedVideogame,
   user,

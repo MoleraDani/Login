@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from './useAuth'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 
-export function useVideogamesCard() {
+// Mantiene actualizada la lisa de videojuegos del usuario autenticado actualizando su estado automaticamente.
+export function useVideogamesFavorites() {
   const [favoritesIds, setFavoritesIds] = useState([])
   const { user } = useAuth()
 

@@ -106,3 +106,26 @@ export const searchSelected = async ({ id }) => {
     throw new Error('Error getting selected game')
   }
 }
+
+//Peticióm mejores juegos por rating
+export const searchBest = async () => {
+  try {
+    const res = await fetch(
+      `${RAWG_ENDPOINT}&ordering=-metacritic&page_size=25`
+    )
+    const json = await res.json()
+
+    const videogames = json.results
+
+    return videogames?.map((videogame) => ({
+      id: videogame.id,
+      title: videogame.name,
+      year: videogame.released
+        ? new Date(videogame.released).getFullYear()
+        : videogame.released,
+      poster: videogame.background_image
+    }))
+  } catch (e) {
+    throw new Error('Error searching videogames')
+  }
+}

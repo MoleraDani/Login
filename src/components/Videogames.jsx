@@ -1,8 +1,9 @@
 import { VideogamesList } from './VideogamesList'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useVideogames } from '../hooks/useVideogames'
 import './Videogames.css'
 import { useAuth } from '../hooks/useAuth'
+import { Filtro } from './Filtro'
 
 // export function useSearch({ search }) {
 //   const isFirstInput = useRef(true)
@@ -15,21 +16,17 @@ import { useAuth } from '../hooks/useAuth'
 // }
 
 export function Videogames() {
-  const { logout, user } = useAuth()
+  const { logout } = useAuth()
   const [search, setSearch] = useState('')
-  const { videogames, getVideogames } = useVideogames({ search })
+  useVideogames({ search })
   const [showSearch, setShowSearch] = useState(true)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const field = new FormData(event.target)
     const query = field.get('query')
     setSearch(query)
   }
-
-  useEffect(() => {
-    getVideogames()
-  }, [search])
 
   const handleLogout = async () => {
     try {
@@ -46,6 +43,7 @@ export function Videogames() {
   return (
     <div className='page'>
       <header className='header'>
+        <Filtro />
         <button onClick={handleLogout}>Log out</button>
         <h3>Busqueda de videojuegos</h3>
         {showSearch && (
@@ -56,10 +54,7 @@ export function Videogames() {
         )}
       </header>
       <main>
-        <VideogamesList
-          videogames={videogames}
-          onToggleShowFavorites={handleToggleSearchVisibility}
-        />
+        <VideogamesList onToggleShowFavorites={handleToggleSearchVisibility} />
       </main>
     </div>
   )
