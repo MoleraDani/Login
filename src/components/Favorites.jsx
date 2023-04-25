@@ -4,6 +4,7 @@ import { FavIcon } from './FavIcon'
 import { handleFavIconClick } from '../utils/handleFavIconClick'
 import { useAuth } from '../hooks/useAuth'
 import { RaceBy } from '@uiball/loaders'
+import { Link } from 'react-router-dom'
 
 export function Favorites({ favoriteIds }) {
   const { favorites, getFavorites, isLoading } = useFavorites({ favoriteIds })
@@ -33,30 +34,32 @@ export function Favorites({ favoriteIds }) {
         {favorite.title} <br />
         <small>{favorite.year}</small>
       </h3>
-      <figure className='image-container'>
-        <img
-          src={
-            favorite.poster ||
-            'https://live.staticflickr.com/2886/34427545586_37151702ce_z.jpg'
-          }
-          alt={`${favorite.Title} poster`}
-        />
-        <FavIcon
-          onClick={(event) => {
-            event.preventDefault()
-            setSelectedVideogameId(favorite.id)
-            handleFavIconClick({
-              selectedVideogame: favorite.id,
-              user,
-              handleFavoriteUpdate
-            })
-          }}
-          isActive={
-            selectedVideogameId === favorite.id ||
-            favoriteIds.includes(favorite.id)
-          }
-        />
-      </figure>
+      <Link to={'videogames/' + favorite.id}>
+        <figure className='image-container'>
+          <img
+            src={
+              favorite.poster ||
+              'https://live.staticflickr.com/2886/34427545586_37151702ce_z.jpg'
+            }
+            alt={`${favorite.Title} poster`}
+          />
+          <FavIcon
+            onClick={(event) => {
+              event.preventDefault()
+              setSelectedVideogameId(favorite.id)
+              handleFavIconClick({
+                selectedVideogame: favorite.id,
+                user,
+                handleFavoriteUpdate
+              })
+            }}
+            isActive={
+              selectedVideogameId === favorite.id ||
+              favoriteIds.includes(favorite.id)
+            }
+          />
+        </figure>
+      </Link>
     </li>
   ))
 }

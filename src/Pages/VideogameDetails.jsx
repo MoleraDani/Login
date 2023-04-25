@@ -6,6 +6,8 @@ import { useAuth } from '../hooks/useAuth'
 import { handleFavIconClick } from '../utils/handleFavIconClick'
 import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'
 import { RaceBy } from '@uiball/loaders'
+import { Header } from '../components/Header'
+import { Comments } from '../components/Comments'
 
 export function VideogameDetails() {
   const { videogameId } = useParams()
@@ -27,6 +29,7 @@ export function VideogameDetails() {
   }
   return (
     <>
+      <Header showSearch={true} />
       {isLoading ? (
         <RaceBy size={280} lineWeight={7} speed={1.4} color='white' />
       ) : (
@@ -79,6 +82,7 @@ export function VideogameDetails() {
             </div>
           )}
           <p>{selected.description}</p>
+          <Comments videogameId={videogameId} />
         </section>
       )}
     </>

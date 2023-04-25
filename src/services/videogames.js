@@ -39,9 +39,6 @@ export const searchFavorites = async ({ favoriteIds }) => {
     const favorites = await Promise.all(promises)
     console.log(favorites)
     return favorites?.map((favorite) => {
-      const trailer = favorite.clips ? Object.values(favorite.clips)[0] : null
-      const rating = favorite.rating // Asegúrate de que 'rating' esté definido
-
       return {
         id: favorite.id,
         title: favorite.name,

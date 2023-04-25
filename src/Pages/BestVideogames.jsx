@@ -6,6 +6,7 @@ import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'
 import { FavIcon } from '../components/FavIcon'
 import { handleFavIconClick } from '../utils/handleFavIconClick'
 import { RaceBy } from '@uiball/loaders'
+import { Header } from '../components/Header'
 
 export function BestVideogames() {
   const { videogames, getVideogames, isLoading } = useBestVideogames()
@@ -23,10 +24,11 @@ export function BestVideogames() {
 
   return (
     <>
+      <Header showSearch={true} />
       {isLoading ? (
         <RaceBy size={280} lineWeight={7} speed={1.4} color='white' />
       ) : (
-        <main>
+        <section>
           <ul>
             {videogames.map((videogame) => {
               return (
@@ -65,7 +67,7 @@ export function BestVideogames() {
               )
             })}
           </ul>
-        </main>
+        </section>
       )}
     </>
   )

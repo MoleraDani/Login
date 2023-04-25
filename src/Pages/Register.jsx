@@ -8,19 +8,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAuth } from '../hooks/useAuth'
 import { Link } from 'react-router-dom'
 
-// const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/
 const EMAIL_REGEX = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
 
 export function Register() {
-  // const userRef = useRef()
+  const userRef = useRef()
   const emailRef = useRef()
   const errRef = useRef()
 
   //Estados para Usuario
-  // const [user, setUser] = useState('')
-  // const [validName, setValidName] = useState(false)
-  // const [userFocus, setUserFocus] = useState(false)
+  const [username, setUsername] = useState('')
+  const [validName, setValidName] = useState(false)
+  const [userFocus, setUserFocus] = useState(false)
 
   //Estados para email
   const [email, setEmail] = useState('')
@@ -49,12 +49,12 @@ export function Register() {
   }, [])
 
   // Validacion de nombre de Usuario cada vez que se modifica el user
-  // useEffect(() => {
-  //   // const result = USER_REGEX.test(user)
-  //   // console.log(result)
-  //   // console.log(user)
-  //   setValidName(USER_REGEX.test(user))
-  // }, [user])
+  useEffect(() => {
+    // const result = USER_REGEX.test(username)
+    // console.log(result)
+    // console.log(username)
+    setValidName(USER_REGEX.test(username))
+  }, [username])
 
   // Validación de email
   useEffect(() => {
@@ -89,7 +89,7 @@ export function Register() {
     }
 
     try {
-      await signup(email, pwd)
+      await signup(email, pwd, username)
       setSuccess(true)
       // Reseteamos los valores
       setEmail('')
@@ -100,7 +100,6 @@ export function Register() {
       errRef.current.focus()
       //TODO gestionar los códigos de error para mostrarlos personalizados.
     }
-    // setSuccess(true)
   }
 
   return (
@@ -125,7 +124,7 @@ export function Register() {
           </p>
           <h1>Registro</h1>
           <form onSubmit={handleSubmit}>
-            {/* <label htmlFor='username'>
+            <label htmlFor='username'>
               Usuario:
               <FontAwesomeIcon
                 icon={faCheck}
@@ -133,7 +132,7 @@ export function Register() {
               />
               <FontAwesomeIcon
                 icon={faTimes}
-                className={validName || !user ? 'hide' : 'invalid'}
+                className={validName || !username ? 'hide' : 'invalid'}
               />
             </label>
             <input
@@ -141,20 +140,22 @@ export function Register() {
               id='username'
               ref={userRef}
               autoComplete='off'
-              onChange={(e) => setUser(e.target.value)} // Cada vez que el usuario cambia le asignamos el nuevo valor
-              value={user}
+              onChange={(e) => setUsername(e.target.value)} // Cada vez que el usuario cambia le asignamos el nuevo valor
+              value={username}
               required
               aria-invalid={validName ? 'false' : 'true'}
               aria-describedby='uidnote'
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
-            /> */}
+            />
             {/* Cuando el focus esta en el input de usuario, mostramos la
             descripción */}
-            {/* <p
+            <p
               id='uidnote'
               className={
-                userFocus && user && !validName ? 'instructions' : 'offscreen'
+                userFocus && username && !validName
+                  ? 'instructions'
+                  : 'offscreen'
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
@@ -163,7 +164,7 @@ export function Register() {
               Debe empezar con una letra.
               <br />
               Se permiten letras, numeros, guiones y guiones bajos.
-            </p> */}
+            </p>
             <label htmlFor='email'>
               Email:
               <FontAwesomeIcon
