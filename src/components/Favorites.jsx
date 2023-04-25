@@ -9,6 +9,7 @@ export function Favorites({ favoriteIds }) {
   const { favorites, getFavorites, isLoading } = useFavorites({ favoriteIds })
   const [selectedVideogameId, setSelectedVideogameId] = useState(null)
 
+  // COmentario random
   const { user } = useAuth()
 
   useEffect(() => {
