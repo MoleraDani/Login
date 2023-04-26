@@ -29,9 +29,11 @@ export function ProfileForm() {
   return (
     <form onSubmit={handleSubmit}>
       <input type='file' onChange={handleImageChange} />
+      <label htmlFor='user-description'>Descripción</label>
       <input
         type='text'
         value={description}
+        id='user-description'
         onChange={handleDescriptionChange}
       />
       <button type='submit'>Actualizar perfil</button>

@@ -16,8 +16,9 @@
 // }
 import { useEffect, useState } from 'react'
 import { doc, getDoc } from 'firebase/firestore'
-import { db } from '../firebase'
-import { useAuth } from '../hooks/useAuth'
+import { db } from '../../firebase'
+import { useAuth } from '../../hooks/useAuth'
+import { Link } from 'react-router-dom'
 
 export function UserProfile() {
   const [userData, setUserData] = useState(null)
@@ -65,12 +66,14 @@ export function UserProfile() {
 
   return (
     <div>
-      <img
-        src={userData.profilePicture || 'https://via.placeholder.com/150'}
-        alt={userData.displayName}
-        width='150'
-        height='150'
-      />
+      <Link to={'/userprofile'}>
+        <img
+          src={userData.profilePicture || 'https://via.placeholder.com/150'}
+          alt={userData.displayName}
+          width='150'
+          height='150'
+        />
+      </Link>
       <h2>{userData.description}</h2>
     </div>
   )

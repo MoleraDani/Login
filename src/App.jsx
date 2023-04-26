@@ -8,6 +8,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { SearchResultsProvider } from './context/SearchResults'
 import { Layout } from './components/Layout'
 import { Favorites } from './Pages/Favorites'
+import { EditUser } from './Pages/EditUser'
 
 export function useSearch({ search }) {
   const isFirstInput = useRef(true)
@@ -38,25 +39,41 @@ function App() {
           <Route
             path='/videogames/:videogameId'
             element={
-              <Layout>
-                <VideogameDetails />
-              </Layout>
+              <ProtectedRoute>
+                <Layout>
+                  <VideogameDetails />
+                </Layout>
+              </ProtectedRoute>
             }
           />
           <Route
             path='/top25'
             element={
-              <Layout>
-                <BestVideogames />
-              </Layout>
+              <ProtectedRoute>
+                <Layout>
+                  <BestVideogames />
+                </Layout>
+              </ProtectedRoute>
             }
           />
           <Route
             path='/favorites'
             element={
-              <Layout>
-                <Favorites />
-              </Layout>
+              <ProtectedRoute>
+                <Layout>
+                  <Favorites />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/userprofile'
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <EditUser />
+                </Layout>
+              </ProtectedRoute>
             }
           />
           <Route path='/register' element={<Register />} />

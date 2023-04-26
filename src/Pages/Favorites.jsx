@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useFavorites } from '../hooks/useFavorites'
-import { FavIcon } from '../components/FavIcon'
+import { FavIcon } from '../components/Icons/FavIcon'
 import { handleFavIconClick } from '../utils/handleFavIconClick'
 import { useAuth } from '../hooks/useAuth'
 import { RaceBy } from '@uiball/loaders'

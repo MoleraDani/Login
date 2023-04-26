@@ -24,7 +24,6 @@ export function Videogames() {
     <>
       <section>
         <VideogamesList onToggleShowFavorites={handleToggleSearchVisibility} />
-        <ProfileForm />
       </section>
     </>
   )
