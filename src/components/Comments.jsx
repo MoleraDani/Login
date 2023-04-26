@@ -47,6 +47,7 @@ export function Comments({ videogameId }) {
         id: docRef.id,
         videogameId,
         text: newComment,
+        createdAt: new Date(),
         username: user.displayName,
         profileImage: user.photoURL
       }

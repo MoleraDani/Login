@@ -6,6 +6,8 @@ import { VideogameDetails } from './Pages/VideogameDetails'
 import { BestVideogames } from './Pages/BestVideogames'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { SearchResultsProvider } from './context/SearchResults'
+import { Layout } from './components/Layout'
+import { Favorites } from './Pages/Favorites'
 
 export function useSearch({ search }) {
   const isFirstInput = useRef(true)
@@ -27,15 +29,36 @@ function App() {
             path='/'
             element={
               <ProtectedRoute>
-                <Home />
+                <Layout>
+                  <Home />
+                </Layout>
               </ProtectedRoute>
             }
           />
           <Route
             path='/videogames/:videogameId'
-            element={<VideogameDetails />}
+            element={
+              <Layout>
+                <VideogameDetails />
+              </Layout>
+            }
           />
-          <Route path='/top25' element={<BestVideogames />} />
+          <Route
+            path='/top25'
+            element={
+              <Layout>
+                <BestVideogames />
+              </Layout>
+            }
+          />
+          <Route
+            path='/favorites'
+            element={
+              <Layout>
+                <Favorites />
+              </Layout>
+            }
+          />
           <Route path='/register' element={<Register />} />
         </Routes>
       </main>

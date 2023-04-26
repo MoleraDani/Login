@@ -1,7 +1,6 @@
 import { VideogamesList } from './VideogamesList'
 import { useState } from 'react'
 import './Videogames.css'
-import { Header } from './Header'
 import { ProfileForm } from './ProfileForm'
 
 // export function useSearch({ search }) {
@@ -23,7 +22,6 @@ export function Videogames() {
 
   return (
     <>
-      <Header showSearch={showSearch} />
       <section>
         <VideogamesList onToggleShowFavorites={handleToggleSearchVisibility} />
         <ProfileForm />

@@ -1,10 +1,11 @@
-import { Filtro } from './Filtro'
+import { Top25Link } from './Top25Link'
 import { FilterGenders } from './FilterGender'
 import { useAuth } from '../hooks/useAuth'
 import { UserProfile } from './UserProfile'
 import { useSearchResults } from '../context/SearchResults'
 import { searchVideogames } from '../services/videogames'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export function Header({ showSearch }) {
   const { updateSearchResults } = useSearchResults()
@@ -30,7 +31,8 @@ export function Header({ showSearch }) {
   return (
     <header className='header'>
       <FilterGenders />
-      <Filtro />
+      <Top25Link />
+      <Link to={'/favorites'}>Favoritos</Link>
       <button onClick={handleLogout}>Log out</button>
       <UserProfile />
       {showSearch && (
