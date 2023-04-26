@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useBestVideogames } from '../hooks/useBestVideogames'
 import { useAuth } from '../hooks/useAuth'
 import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'
-import { FavIcon } from '../components/FavIcon'
+import { FavIcon } from '../components/Icons/FavIcon'
 import { handleFavIconClick } from '../utils/handleFavIconClick'
 import { RaceBy } from '@uiball/loaders'
 

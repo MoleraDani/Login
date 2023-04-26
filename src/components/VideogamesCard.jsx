@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FavIcon } from './FavIcon'
+import { FavIcon } from './Icons/FavIcon'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'

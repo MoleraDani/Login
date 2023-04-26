@@ -1,22 +1,15 @@
-import { useEffect, useId, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function FilterGenders() {
-  const genderFitlerID = useId()
-  const [filter, setFilter] = useState()
+  const navigate = useNavigate()
 
   const handleChangeGender = (event) => {
     const newValue = event.target.value
-    setFilter(newValue)
+    navigate(`genre/${newValue}`)
   }
-  useEffect(() => {
-    console.log(filter)
-  }, [filter])
+
   return (
-    <select
-      onChange={handleChangeGender}
-      name='genderFilter'
-      id={genderFitlerID}
-    >
+    <select onChange={handleChangeGender} name='genderFilter'>
       <option value='action'>Action</option>
       <option value='arcade2'>Arcade</option>
       <option value='role-playing-games-rpg'>RPG</option>
@@ -29,7 +22,7 @@ export function FilterGenders() {
       <option value='indie'>Puzzle</option>
       <option value='platformer'>Platform</option>
       <option value='racing'>Racing</option>
-      <option value='massively-multiplayer'>Masive multiplayer</option>
+      <option value='massively-multiplayer'>Massive multiplayer</option>
       <option value='sports'>Sports</option>
       <option value='family'>Family</option>
       <option value='fighting'>Fighting</option>

@@ -78,7 +78,6 @@ export function AuthProvider({ children }) {
       try {
         const userDocRef = doc(db, 'users', user.uid)
         await updateDoc(userDocRef, { description: description })
-        await updateProfile(user, { displayName: description })
       } catch (error) {
         console.error('Error updating user description:', error)
       }

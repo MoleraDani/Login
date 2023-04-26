@@ -1,11 +1,9 @@
-import { Top25Link } from './Top25Link'
-import { FilterGenders } from './FilterGender'
 import { useAuth } from '../hooks/useAuth'
-import { UserProfile } from './UserProfile'
+import { UserProfile } from './Header/UserProfile'
 import { useSearchResults } from '../context/SearchResults'
 import { searchVideogames } from '../services/videogames'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Menu } from './Header/Menu'
 
 export function Header({ showSearch }) {
   const { updateSearchResults } = useSearchResults()
@@ -30,11 +28,8 @@ export function Header({ showSearch }) {
 
   return (
     <header className='header'>
-      <FilterGenders />
-      <Top25Link />
-      <Link to={'/favorites'}>Favoritos</Link>
+      <Menu />
       <button onClick={handleLogout}>Log out</button>
-      <UserProfile />
       {showSearch && (
         <>
           <h3>Busqueda de videojuegos</h3>
@@ -44,6 +39,7 @@ export function Header({ showSearch }) {
           </form>
         </>
       )}
+      <UserProfile />
     </header>
   )
 }

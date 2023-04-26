@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelected } from '../hooks/useSelected'
-import { FavIcon } from '../components/FavIcon'
+import { FavIcon } from '../components/Icons/FavIcon'
 import { useAuth } from '../hooks/useAuth'
 import { handleFavIconClick } from '../utils/handleFavIconClick'
 import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'
