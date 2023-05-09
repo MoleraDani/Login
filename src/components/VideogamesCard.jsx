@@ -4,29 +4,23 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'
 import { handleFavIconClick } from '../utils/handleFavIconClick'
-import { useSearchResults } from '../context/SearchResults'
 
-export function VideogamesCard() {
+export function VideogamesCard({ videogame }) {
   const [selectedVideogameId, setSelectedVideogameId] = useState(null)
   const { favoritesIds } = useVideogamesFavorites()
   const { user } = useAuth()
-  const { searchResults } = useSearchResults()
 
   function handleFavoriteUpdate(selectedVideogameId) {
     setSelectedVideogameId(selectedVideogameId)
   }
 
-  if (!searchResults) {
-    return null
-  }
-
-  return searchResults.map((videogame) => (
+  return (
     <li key={videogame.id} className='videogames-element'>
       <h3>
         {videogame.title} <br />
         <small>{videogame.year}</small>
       </h3>
-      <Link to={'videogames/' + videogame.id}>
+      <Link to={'/videogames/' + videogame.id}>
         <figure className='image-container'>
           <img
             src={
@@ -53,5 +47,5 @@ export function VideogamesCard() {
         </figure>
       </Link>
     </li>
-  ))
+  )
 }

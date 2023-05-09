@@ -7,6 +7,7 @@ import { handleFavIconClick } from '../utils/handleFavIconClick'
 import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'
 import { RaceBy } from '@uiball/loaders'
 import { Comments } from '../components/Comments'
+import { ScreenshotSlider } from '../components/ScreenshotSlider'
 
 export function VideogameDetails() {
   const { videogameId } = useParams()
@@ -61,22 +62,13 @@ export function VideogameDetails() {
             />
           </figure>
           <small>{selected.rating}</small>
-          {selected.trailer && (
-            <div>
-              <h4>Trailer</h4>
-              <video src={selected.trailer} controls></video>
-            </div>
-          )}
           {selected.screenshots?.length > 0 && (
             <div>
               <h4>Screenshots</h4>
-              {selected.screenshots.map((screenshot, index) => (
-                <img
-                  key={index}
-                  src={screenshot}
-                  alt={`Screenshot ${index + 1}`}
-                />
-              ))}
+              <ScreenshotSlider
+                screenshots={selected.screenshots}
+                trailer={selected.trailer}
+              />
             </div>
           )}
           <p>{selected.description}</p>

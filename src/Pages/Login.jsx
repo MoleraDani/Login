@@ -43,13 +43,13 @@ export function Login() {
   return (
     <>
       {success && setTimeout(() => navigate('/'), 2000) ? (
-        <section>
+        <section className='login-section'>
           <h1>Has iniciado sesion</h1>
           <br />
           <p>Bienvenido {user.displayName}</p>
         </section>
       ) : (
-        <section>
+        <section className='login-section'>
           <p
             ref={errRef}
             className={errMsg ? 'errmsg' : 'offscreen'}

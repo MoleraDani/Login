@@ -9,6 +9,8 @@ import { SearchResultsProvider } from './context/SearchResults'
 import { Layout } from './components/Layout'
 import { Favorites } from './Pages/Favorites'
 import { EditUser } from './Pages/EditUser'
+import { GamesByGenre } from './Pages/GamesByGenre'
+import { Videogames } from './Pages/Videogames'
 
 export function useSearch({ search }) {
   const isFirstInput = useRef(true)
@@ -32,6 +34,17 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <Home />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/videogames'
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Videogames />
                 </Layout>
               </ProtectedRoute>
             }
@@ -72,6 +85,16 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <EditUser />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/genre/:genre'
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <GamesByGenre />
                 </Layout>
               </ProtectedRoute>
             }

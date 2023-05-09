@@ -5,7 +5,7 @@ export function FilterGenders() {
 
   const handleChangeGender = (event) => {
     const newValue = event.target.value
-    navigate(`genre/${newValue}`)
+    navigate(`/genre/${newValue}`)
   }
 
   return (

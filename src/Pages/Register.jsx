@@ -105,7 +105,7 @@ export function Register() {
   return (
     <>
       {success ? (
-        <section>
+        <section className='login-section'>
           <h1>Registrado!</h1>
           <br />{' '}
           <p>
@@ -113,7 +113,7 @@ export function Register() {
           </p>
         </section>
       ) : (
-        <section>
+        <section className='login-section'>
           {/* Mostramos si hay error */}
           <p
             ref={errRef}

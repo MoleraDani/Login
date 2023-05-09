@@ -17,6 +17,10 @@ body {
   background-color: #3a4750;
 }
 
+main {
+  margin-top: 6rem;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -119,4 +123,8 @@ button {
 
 .line {
   display: inline-block;
+}
+
+.login-section {
+  max-width: 50vw;
 }

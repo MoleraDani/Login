@@ -1,9 +1,10 @@
-import { useAuth } from '../hooks/useAuth'
-import { UserProfile } from './Header/UserProfile'
-import { useSearchResults } from '../context/SearchResults'
-import { searchVideogames } from '../services/videogames'
+import { useAuth } from '../../hooks/useAuth'
+import { UserProfile } from './UserProfile'
+import { useSearchResults } from '../../context/SearchResults'
+import { searchVideogames } from '../../services/videogames'
 import { useNavigate } from 'react-router-dom'
-import { Menu } from './Header/Menu'
+import { Menu } from './Menu'
+import './Header.css'
 
 export function Header({ showSearch }) {
   const { updateSearchResults } = useSearchResults()
@@ -23,7 +24,7 @@ export function Header({ showSearch }) {
     const field = new FormData(event.target)
     const query = field.get('query')
     updateSearchResults(await searchVideogames({ search: query }))
-    navigate('/')
+    navigate('/videogames')
   }
 
   return (

@@ -126,3 +126,72 @@ export const searchBest = async () => {
     throw new Error('Error searching videogames')
   }
 }
+
+//Petición de juegos por género
+export const searchGamesByGenre = async (genre) => {
+  try {
+    const res = await fetch(
+      `${RAWG_ENDPOINT}&genres=${genre}&ordering=-metacritic&page_size=25`
+    )
+    const json = await res.json()
+
+    const videogames = json.results
+
+    return videogames?.map((videogame) => ({
+      id: videogame.id,
+      title: videogame.name,
+      year: videogame.released
+        ? new Date(videogame.released).getFullYear()
+        : videogame.released,
+      poster: videogame.background_image
+    }))
+  } catch (e) {
+    throw new Error('Error searching games by genre')
+  }
+}
+
+// Petición de los 10 videojuegos más esperados del 2023
+export const searchMostAnticipatedGames = async () => {
+  try {
+    const res = await fetch(
+      `${RAWG_ENDPOINT}&dates=2023-01-01,2023-12-31&ordering=-added&page_size=10`
+    )
+    const json = await res.json()
+
+    const videogames = json.results
+
+    return videogames?.map((videogame) => ({
+      id: videogame.id,
+      title: videogame.name,
+      year: videogame.released
+        ? new Date(videogame.released).getFullYear()
+        : videogame.released,
+      poster: videogame.background_image
+    }))
+  } catch (e) {
+    throw new Error('Error searching most anticipated games')
+  }
+}
+
+// Petición de los mejores videojuegos del 2022
+export const searchBestGamesOf2022 = async () => {
+  try {
+    const res = await fetch(
+      `${RAWG_ENDPOINT}&dates=2022-01-01,2022-12-31&ordering=-metacritic&page_size=10`
+    )
+    const json = await res.json()
+
+    const videogames = json.results
+
+    return videogames?.map((videogame) => ({
+      id: videogame.id,
+      title: videogame.name,
+      year: videogame.released
+        ? new Date(videogame.released).getFullYear()
+        : videogame.released,
+      poster: videogame.background_image
+    }))
+  } catch (e) {
+    throw new Error('Error searching best games of 2022')
+  }
+}

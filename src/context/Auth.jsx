@@ -65,14 +65,6 @@ export function AuthProvider({ children }) {
     }
   }
 
-  // const updateProfileImage = async (imageFile) => {
-  //   const storageRef = ref(storage, `profileImages/${user.uid}`)
-  //   await uploadBytes(storageRef, imageFile)
-
-  //   const imageUrl = await getDownloadURL(storageRef)
-  //   await updateProfile(user, { photoURL: imageUrl })
-  // }
-
   const updateUserDescription = async (description) => {
     if (user) {
       try {
@@ -83,10 +75,6 @@ export function AuthProvider({ children }) {
       }
     }
   }
-
-  // const updateUserDescription = async (description) => {
-  //   await updateProfile(user, { displayName: description })
-  // }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

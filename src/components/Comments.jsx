@@ -62,6 +62,7 @@ export function Comments({ videogameId }) {
         {comments.map((comment) => (
           <li key={comment.id}>
             <img
+              className='userprofile-img'
               src={comment.profileImage}
               alt={`${comment.username} profile image`}
             />
