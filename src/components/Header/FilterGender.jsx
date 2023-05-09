@@ -11,7 +11,7 @@ export function FilterGenders() {
   return (
     <select onChange={handleChangeGender} name='genderFilter'>
       <option value='action'>Action</option>
-      <option value='arcade2'>Arcade</option>
+      <option value='arcade'>Arcade</option>
       <option value='role-playing-games-rpg'>RPG</option>
       <option value='indie'>Indie</option>
       <option value='adventure'>Adventure</option>
