@@ -1,5 +1,10 @@
-#Videogames-Project
+# Videogames-Project
 
-This is a personal project implemented using React and Firebase.
+This is a personal project implemented using **React**.
 
-The project is a website dedicated to video games. It features a login system, a search engine, an option to save favorites, and a comments section for each video game.
+The project is a website dedicated to **video games**. It features:
+
+- **Login system**
+- **Search engine**
+- **Option to save favorites**
+- **Comments section for each video game**
