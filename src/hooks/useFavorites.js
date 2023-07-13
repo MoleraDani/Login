@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { searchFavorites } from '../services/videogames.js'
 
-export function useFavorites({ favoritesIds }) {
+export function useFavorites ({ favoritesIds }) {
   const [favorites, setFavorites] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState()

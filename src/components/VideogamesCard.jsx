@@ -5,12 +5,12 @@ import { useAuth } from '../hooks/useAuth'
 import { useVideogamesFavorites } from '../hooks/useVideogamesFavList'
 import { handleFavIconClick } from '../utils/handleFavIconClick'
 
-export function VideogamesCard({ videogame }) {
+export function VideogamesCard ({ videogame }) {
   const [selectedVideogameId, setSelectedVideogameId] = useState(null)
   const { favoritesIds } = useVideogamesFavorites()
   const { user } = useAuth()
 
-  function handleFavoriteUpdate(selectedVideogameId) {
+  function handleFavoriteUpdate (selectedVideogameId) {
     setSelectedVideogameId(selectedVideogameId)
   }
 

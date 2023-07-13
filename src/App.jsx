@@ -11,21 +11,25 @@ import { Favorites } from './Pages/Favorites'
 import { EditUser } from './Pages/EditUser'
 import { GamesByGenre } from './Pages/GamesByGenre'
 import { Videogames } from './Pages/Videogames'
+import { PrivacyNotice } from './Pages/PrivacyNotice'
+import { LegalNotice } from './Pages/LegalNotice'
+import { ScrollToTop } from './components/ScrollToTop'
 
-export function useSearch({ search }) {
-  const isFirstInput = useRef(true)
+// export function useSearch ({ search }) {
+//   const isFirstInput = useRef(true)
 
-  useEffect(() => {
-    if (isFirstInput) {
-      isFirstInput.current = search === ''
-    }
-  }, [])
-}
+//   useEffect(() => {
+//     if (isFirstInput) {
+//       isFirstInput.current = search === ''
+//     }
+//   }, [])
+// }
 
-function App() {
+function App () {
   return (
     <SearchResultsProvider>
       <main className='App'>
+        <ScrollToTop />
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route
@@ -100,6 +104,27 @@ function App() {
             }
           />
           <Route path='/register' element={<Register />} />
+
+          <Route
+            path='/PrivacyNotice'
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <PrivacyNotice />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/LegalNotice'
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <LegalNotice />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
     </SearchResultsProvider>

@@ -1,9 +1,9 @@
 // const MOVIE_ENDPOINT = `https://www.omdbapi.com/?apikey=d5cdd532`
 const RAWG_API_KEY = '90a1de72514b4eec96ab758896c2f57b'
-const RAWG_ENDPOINT = `https://api.rawg.io/api/games?key=90a1de72514b4eec96ab758896c2f57b`
-const RAWG_GAME_DETAILS_ENDPOINT = `https://api.rawg.io/api/games`
+const RAWG_ENDPOINT = 'https://api.rawg.io/api/games?key=90a1de72514b4eec96ab758896c2f57b'
+const RAWG_GAME_DETAILS_ENDPOINT = 'https://api.rawg.io/api/games'
 
-//Petición datos de la busqueda de videojuego
+// Petición datos de la busqueda de videojuego
 export const searchVideogames = async ({ search }) => {
   if (search === '') return
 
@@ -28,7 +28,7 @@ export const searchVideogames = async ({ search }) => {
   }
 }
 
-//Petición datos de los videojuegos favoritos
+// Petición datos de los videojuegos favoritos
 export const searchFavorites = async ({ favoriteIds }) => {
   const promises = favoriteIds.map((id) =>
     fetch(
@@ -53,7 +53,7 @@ export const searchFavorites = async ({ favoriteIds }) => {
   }
 }
 
-//Petición datos del videojuego seleccionado
+// Petición datos del videojuego seleccionado
 export const searchSelected = async ({ id }) => {
   try {
     const gameDetailsPromise = fetch(
@@ -104,7 +104,7 @@ export const searchSelected = async ({ id }) => {
   }
 }
 
-//Peticióm mejores juegos por rating
+// Peticióm mejores juegos por rating
 export const searchBest = async () => {
   try {
     const res = await fetch(
@@ -127,7 +127,7 @@ export const searchBest = async () => {
   }
 }
 
-//Petición de juegos por género
+// Petición de juegos por género
 export const searchGamesByGenre = async (genre) => {
   try {
     const res = await fetch(

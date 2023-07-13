@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { searchMostAnticipatedGames } from '../services/videogames'
 
-export function useMostAnticipatedGames() {
+export function useMostAnticipatedGames () {
   const [mostAnticipatedGames, setMostAnticipatedGames] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState()

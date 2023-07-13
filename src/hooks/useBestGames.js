@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { searchBestGamesOf2022 } from '../services/videogames'
 
-export function useBestGames() {
+export function useBestGames () {
   const [bestGames, setBestGames] = useState([])
   const [isLoadingBestGames, setIsLoadingBestGames] = useState(true)
   const [isErrorBestGames, setIsErrorBestGames] = useState()

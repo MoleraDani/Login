@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { VideogamesCard } from '../components/VideogamesCard'
 import { useMostAnticipatedGames } from '../hooks/useMostAnticipatedGames'
 import { useBestGames } from '../hooks/useBestGames'
 import { RaceBy } from '@uiball/loaders'
+import { Link } from 'react-router-dom'
 
-export function Home() {
+export function Home () {
   const {
     isError,
     isLoading,
@@ -23,34 +24,53 @@ export function Home() {
 
   return (
     <>
-      <h2>Los 10 videojuegos más esperados del 2023</h2>
-      {isLoading ? (
-        <RaceBy size={280} lineWeight={7} speed={1.4} color='white' />
-      ) : (
-        <ul className='videogames-list'>
-          {mostAnticipatedGames.length > 0 ? (
-            mostAnticipatedGames.map((game) => (
-              <VideogamesCard key={game.id} videogame={game} />
-            ))
-          ) : (
-            <p>{isError}</p>
+      <h2>The most anticipated games of 2023</h2>
+      <div className='separator'>
+        <hr />
+      </div>
+      {isLoading
+        ? (
+          <RaceBy size={280} lineWeight={7} speed={1.4} color='white' />
+          )
+        : (
+          <ul className='videogames-list'>
+            {mostAnticipatedGames.length > 0
+              ? (
+                  mostAnticipatedGames.map((game) => (
+                    <VideogamesCard key={game.id} videogame={game} />
+                  ))
+                )
+              : (
+                <p>{isError}</p>
+                )}
+          </ul>
           )}
-        </ul>
-      )}
-      <h2>Los mejores videojuegos del 2022</h2>
-      {isLoadingBestGames ? (
-        <RaceBy size={280} lineWeight={7} speed={1.4} color='white' />
-      ) : (
-        <ul className='videogames-list'>
-          {bestGames.length > 0 ? (
-            bestGames.map((game) => (
-              <VideogamesCard key={game.id} videogame={game} />
-            ))
-          ) : (
-            <p>{isErrorBestGames}</p>
+      <h2>The best video games of 2022</h2>
+      <div className='separator'>
+        <hr />
+      </div>
+      {isLoadingBestGames
+        ? (
+          <RaceBy size={280} lineWeight={7} speed={1.4} color='white' />
+          )
+        : (
+          <ul className='videogames-list'>
+            {bestGames.length > 0
+              ? (
+                  bestGames.map((game) => (
+                    <VideogamesCard key={game.id} videogame={game} />
+                  ))
+                )
+              : (
+                <p>{isErrorBestGames}</p>
+                )}
+          </ul>
           )}
-        </ul>
-      )}
+      <footer>
+        <p>&copy; 2023 JuegosFlix. All rights reserved.</p>
+        <Link to='/PrivacyNotice'>Privacy Notice</Link><br />
+        <Link to='/LegalNotice'>Legal Notice</Link>
+      </footer>
     </>
   )
 }

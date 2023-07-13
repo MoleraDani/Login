@@ -2,7 +2,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-export function ScreenshotSlider({ screenshots, trailer }) {
+export function ScreenshotSlider ({ screenshots, trailer }) {
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -13,17 +13,19 @@ export function ScreenshotSlider({ screenshots, trailer }) {
   }
 
   return (
-    <Slider {...sliderSettings}>
-      {trailer && (
-        <div>
-          <video src={trailer} controls></video>
-        </div>
-      )}
-      {screenshots.map((screenshot, index) => (
-        <div key={index}>
-          <img src={screenshot} alt={`Screenshot ${index + 1}`} />
-        </div>
-      ))}
-    </Slider>
+    <div className='slider-container'>
+      <Slider {...sliderSettings}>
+        {trailer && (
+          <div className='slider-image-container'>
+            <video src={trailer} controls className='slider-image' />
+          </div>
+        )}
+        {screenshots.map((screenshot, index) => (
+          <div key={index} className='slider-image-container'>
+            <img src={screenshot} alt={`Screenshot ${index + 1}`} className='slider-image' />
+          </div>
+        ))}
+      </Slider>
+    </div>
   )
 }

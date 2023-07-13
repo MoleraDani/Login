@@ -3,7 +3,7 @@ import { doc, getDoc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuth } from './useAuth'
 
-export function useUserProfile() {
+export function useUserProfile () {
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(true)
   const auth = useAuth()

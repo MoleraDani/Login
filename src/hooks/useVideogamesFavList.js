@@ -4,11 +4,11 @@ import { doc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 
 // Mantiene actualizada la lisa de videojuegos del usuario autenticado actualizando su estado automaticamente.
-export function useVideogamesFavorites() {
+export function useVideogamesFavorites () {
   const [favoritesIds, setFavoritesIds] = useState([])
   const { user } = useAuth()
 
-  //Listener en tiempo real de cambios del usuario actual
+  // Listener en tiempo real de cambios del usuario actual
   const getFavoritesFromDDBB = () => {
     if (user) {
       const userRef = doc(db, 'users', user.uid)

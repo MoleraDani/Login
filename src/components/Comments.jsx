@@ -2,21 +2,22 @@ import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
 import { db } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
+import './Comments.css'
 
-export function Comments({ videogameId }) {
+export function Comments ({ videogameId }) {
   const [comments, setComments] = useState([])
   const [newComment, setNewComment] = useState('')
   const { user } = useAuth()
 
   useEffect(() => {
-    async function fetchComments() {
-      //Crear una consulta para obtener los comentarios del videojuego
+    async function fetchComments () {
+      // Crear una consulta para obtener los comentarios del videojuego
       const q = query(
         collection(db, 'comments'),
         where('videogameId', '==', videogameId)
       )
       const querySnapshot = await getDocs(q)
-      //Convertimos a un array de objetos mas fácil de leer
+      // Convertimos a un array de objetos más fácil de leer
       const fetchedComments = querySnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() }
       })
@@ -27,12 +28,12 @@ export function Comments({ videogameId }) {
     fetchComments()
   }, [videogameId])
 
-  async function addComment() {
+  async function addComment () {
     if (newComment.trim() === '') {
       return
     }
 
-    //Crear un nuevo documento para el comentario en la base de datos
+    // Crear un nuevo documento para el comentario en la base de datos
     const docRef = await addDoc(collection(db, 'comments'), {
       videogameId,
       text: newComment,
@@ -56,27 +57,37 @@ export function Comments({ videogameId }) {
   }
 
   return (
-    <div>
+    <div className='comment-box'>
       <h4>Comentarios:</h4>
-      <ul>
-        {comments.map((comment) => (
-          <li key={comment.id}>
+      <ul className='comment-list'>
+        {comments.map((comment, index) => (
+          <li
+            key={comment.id}
+            className={`comment-container ${index % 2 === 0 ? 'blue' : 'white'} ${
+              index % 2 === 1 ? 'right' : ''
+            }`}
+          >
             <img
               className='userprofile-img'
               src={comment.profileImage}
               alt={`${comment.username} profile image`}
             />
-            {comment.username}: {comment.text}
+            <span>
+              {comment.username}: {comment.text}
+            </span>
           </li>
         ))}
       </ul>
       <input
         type='text'
+        className='comment-input'
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
         placeholder='Escribe un comentario...'
       />
-      <button onClick={addComment}>Enviar comentario</button>
+      <button className='comment-btn' onClick={addComment}>
+        Enviar comentario
+      </button>
     </div>
   )
 }

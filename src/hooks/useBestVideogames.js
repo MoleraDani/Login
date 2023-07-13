@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { searchBest } from '../services/videogames.js'
 
-export function useBestVideogames() {
+export function useBestVideogames () {
   const [videogames, setVideogames] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 

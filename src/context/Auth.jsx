@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -8,13 +7,13 @@ import {
   updateProfile
 } from 'firebase/auth'
 import { updateDoc, doc, setDoc } from 'firebase/firestore'
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { auth, db, storage } from '../firebase'
 
 const AuthContext = createContext({})
 
-export function AuthProvider({ children }) {
-  //Info de usuario, null si no se ha iniciado sesión
+export function AuthProvider ({ children }) {
+  // Info de usuario, null si no se ha iniciado sesión
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -26,13 +25,13 @@ export function AuthProvider({ children }) {
     )
     console.log(userCredential)
     const user = userCredential.user
-    //console.log(email, password)
+    // console.log(email, password)
     // Crea un documento en la colección de usuarios con el nombre de usuario y el correo electrónico
     await setDoc(doc(db, 'users', user.uid), {
-      username: username,
+      username,
       description: '',
       profilePicture: 'https://via.placeholder.com/150',
-      email: email
+      email
     })
     // Actualiza el perfil de usuario en Firebase
     await updateProfile(user, {
@@ -69,7 +68,7 @@ export function AuthProvider({ children }) {
     if (user) {
       try {
         const userDocRef = doc(db, 'users', user.uid)
-        await updateDoc(userDocRef, { description: description })
+        await updateDoc(userDocRef, { description })
       } catch (error) {
         console.error('Error updating user description:', error)
       }

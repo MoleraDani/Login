@@ -1,5 +1,5 @@
 import { ProfileForm } from '../components/ProfileForm'
 
-export function EditUser() {
+export function EditUser () {
   return <ProfileForm />
 }

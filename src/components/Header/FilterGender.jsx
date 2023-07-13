@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+import './FilterGender.css'
 
-export function FilterGenders() {
+export function FilterGenders () {
   const navigate = useNavigate()
 
   const handleChangeGender = (event) => {
@@ -9,7 +10,8 @@ export function FilterGenders() {
   }
 
   return (
-    <select onChange={handleChangeGender} name='genderFilter'>
+    <select className='filtro' onChange={handleChangeGender} name='genderFilter'>
+      <option value=''>Choose Gender</option>
       <option value='action'>Action</option>
       <option value='arcade'>Arcade</option>
       <option value='role-playing-games-rpg'>RPG</option>

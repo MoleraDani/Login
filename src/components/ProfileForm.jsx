@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { useUserProfile } from '../hooks/useUserProfile'
-
-export function ProfileForm() {
+import './ProfileForm.css'
+export function ProfileForm () {
   const [image, setImage] = useState(null)
   const [description, setDescription] = useState('')
   const { user, updateProfileImage, updateUserDescription } = useAuth()
@@ -47,18 +47,21 @@ export function ProfileForm() {
         <p>Descripción: {userData?.description}</p>
       </section>
       <section>
-        <form onSubmit={handleSubmit}>
+        <form className='form2' onSubmit={handleSubmit}>
           <label htmlFor='file'>Nueva imagen de perfil:</label>
-          <input type='file' onChange={handleImageChange} />
+          <input className='selecarc' type='file' onChange={handleImageChange} />
           <label htmlFor='user-description'>Nueva descripción:</label>
-          <input
+          <textarea
             type='text'
             value={description}
             id='user-description'
             onChange={handleDescriptionChange}
           />
-          <button type='submit'>Actualizar perfil</button>
+          <button className='actperfil' type='submit'>Actualizar perfil</button>
         </form>
+        <footer>
+          <p>&copy; 2023 JuegosFlix. Todos los derechos reservados.</p>
+        </footer>
       </section>
     </>
   )

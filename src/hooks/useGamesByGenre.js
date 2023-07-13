@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { searchGamesByGenre } from '../services/videogames'
 
-export function useGamesByGenre({ genre }) {
+export function useGamesByGenre ({ genre }) {
   const [isLoading, setIsLoading] = useState(true)
   const [games, setGames] = useState([])
 

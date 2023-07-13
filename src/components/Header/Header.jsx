@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom'
 import { Menu } from './Menu'
 import './Header.css'
 
-export function Header({ showSearch }) {
-  const { updateSearchResults } = useSearchResults()
+export function Header ({ showSearch }) {
   const { logout } = useAuth()
   const navigate = useNavigate()
+  const { updateSearchResults } = useSearchResults()
 
   const handleLogout = async () => {
     try {
@@ -23,24 +23,27 @@ export function Header({ showSearch }) {
     event.preventDefault()
     const field = new FormData(event.target)
     const query = field.get('query')
-    updateSearchResults(await searchVideogames({ search: query }))
+    const results = await searchVideogames({ search: query })
+    updateSearchResults(results)
     navigate('/videogames')
   }
 
   return (
     <header className='header'>
       <Menu />
-      <button onClick={handleLogout}>Log out</button>
+
       {showSearch && (
         <>
-          <h3>Busqueda de videojuegos</h3>
-          <form action='' onSubmit={handleSubmit}>
-            <input type='text' name='query' id='' />
-            <button>Buscar</button>
+
+          <form action='' className='form' onSubmit={handleSubmit}>
+            <input type='text' name='query' placeholder='Search' className='busqueda' /><button className='btn'>Search</button>
+
           </form>
         </>
       )}
       <UserProfile />
+      <button className='logout' onClick={handleLogout}>Log out</button>
+
     </header>
   )
 }

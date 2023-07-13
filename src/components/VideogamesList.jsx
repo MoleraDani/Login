@@ -1,11 +1,12 @@
 import { VideogamesCard } from './VideogamesCard'
 import { useSearchResults } from '../context/SearchResults'
+import './Videogames.css'
 
-function NoResults() {
+function NoResults () {
   return <p>No se han obtenido resultados</p>
 }
 
-export function VideogamesList() {
+export function VideogamesList () {
   const { searchResults } = useSearchResults()
 
   const hasVideogames = searchResults?.length > 0
@@ -13,13 +14,15 @@ export function VideogamesList() {
   return (
     <>
       <ul className='videogames-list'>
-        {hasVideogames ? (
-          searchResults.map((videogame) => (
-            <VideogamesCard key={videogame.id} videogame={videogame} />
-          ))
-        ) : (
-          <NoResults />
-        )}
+        {hasVideogames
+          ? (
+              searchResults.map((videogame) => (
+                <VideogamesCard key={videogame.id} videogame={videogame} />
+              ))
+            )
+          : (
+            <NoResults />
+            )}
       </ul>
     </>
   )

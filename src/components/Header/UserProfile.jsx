@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useUserProfile } from '../../hooks/useUserProfile'
 
-export function UserProfile() {
+export function UserProfile () {
   const { userData, loading } = useUserProfile()
 
   if (loading) {
@@ -12,23 +12,24 @@ export function UserProfile() {
     return (
       <div>
         {' '}
-        <img src='https://via.placeholder.com/150' width='150' height='150' />
+        <img src='https://via.placeholder.com/150' />
       </div>
     )
   }
 
   return (
-    <div>
-      <Link to={'/userprofile'}>
+    <figure className='userprofile-container'>
+      <Link to='/userprofile'>
         <img
           className='userprofile-img'
-          src={userData.profilePicture || 'https://via.placeholder.com/150'}
+          src={userData.profilePicture || 'https://via.placeholder.com/75'}
           alt={`Image profile of ${userData.username}`}
-          width='150'
-          height='150'
+          width='75'
+          height='75'
         />
       </Link>
       <h5>{userData.username}</h5>
-    </div>
+    </figure>
+
   )
 }
