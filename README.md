@@ -12,4 +12,5 @@ The project is a website dedicated to **video games**. It features:
 - **Comments section for each video game**
 
   
-[Project Main Page](moleradani-videogames-project.netlify.app)
+[Project Main Page](https://moleradani-videogames-project.netlify.app)
+
