@@ -12,4 +12,4 @@ The project is a website dedicated to **video games**. It features:
 - **Comments section for each video game**
 
   
-[Project Main Page](https://eclectic-mooncake-ec3c10.netlify.app/login)
+[Project Main Page](moleradani-videogames-project.netlify.app)
